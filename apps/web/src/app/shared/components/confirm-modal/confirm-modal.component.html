@@ -1,0 +1,32 @@
+@if (true) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/50" (click)="cancel.emit()"></div>
+    <div class="relative bg-white dark:bg-[#2a2a2a] rounded-xl shadow-xl p-6 w-full max-w-sm animate-slide-up">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-warning-50 dark:bg-warning-500/10 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-warning-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white">{{ title() }}</h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{{ message() }}</p>
+        </div>
+      </div>
+      <div class="mt-6 flex justify-end gap-3">
+        <button (click)="cancel.emit()" [disabled]="loading()" class="px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg transition-colors disabled:opacity-50">
+          {{ cancelText() }}
+        </button>
+        <button (click)="confirm.emit()" [disabled]="loading()" class="px-4 py-2 text-sm font-medium text-white bg-warning-500 hover:bg-warning-700 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2">
+          @if (loading()) {
+            <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+          }
+          {{ confirmText() }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,50 @@
+<div class="bg-white dark:bg-[#2a2a2a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
+  <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-6">Pipeline por Etapa</h3>
+  @if (data().length) {
+    <div class="overflow-x-auto">
+      <svg [attr.width]="svgWidth()" [attr.height]="barHeight() + 60" class="w-full">
+        @for (item of data(); track $index; let i = $index) {
+          @let barH = getBarHeight(item.value);
+          @let x = i * 90 + 20;
+          @let barW = 60;
+          <g>
+            <rect
+              [attr.x]="x"
+              [attr.y]="barHeight() - barH"
+              [attr.width]="barW"
+              [attr.height]="barH"
+              [attr.rx]="4"
+              class="fill-primary-500/80 hover:fill-primary-500 transition-colors cursor-pointer"
+            />
+            <text
+              [attr.x]="x + barW / 2"
+              [attr.y]="barHeight() - barH - 6"
+              text-anchor="middle"
+              class="fill-neutral-600 dark:fill-neutral-400 text-xs"
+            >
+              {{ formatCurrency(item.value) }}
+            </text>
+            <text
+              [attr.x]="x + barW / 2"
+              [attr.y]="barHeight() + 18"
+              text-anchor="middle"
+              class="fill-neutral-700 dark:fill-neutral-300 text-xs font-medium"
+            >
+              {{ getLabel(item.stage) }}
+            </text>
+            <text
+              [attr.x]="x + barW / 2"
+              [attr.y]="barHeight() + 36"
+              text-anchor="middle"
+              class="fill-neutral-500 text-xs"
+            >
+              {{ item.count }} deals
+            </text>
+          </g>
+        }
+      </svg>
+    </div>
+  } @else {
+    <p class="text-sm text-neutral-500 dark:text-neutral-400 text-center py-8">No hay datos de pipeline disponibles</p>
+  }
+</div>

@@ -1,0 +1,44 @@
+<div class="bg-white dark:bg-[#2a2a2a] rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
+  <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Actividad Reciente</h3>
+  @if (activities().length) {
+    <div class="space-y-4">
+      @for (activity of activities(); track activity.id) {
+        <div class="flex gap-3">
+          @if (activity.type === 'note') {
+            <div class="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary-500" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          } @else if (activity.type === 'call') {
+            <div class="w-8 h-8 rounded-full bg-success-50 dark:bg-success-900/30 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-success-500" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>
+            </div>
+          } @else if (activity.type === 'email') {
+            <div class="w-8 h-8 rounded-full bg-accent-50 dark:bg-accent-900/30 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent-500" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+            </div>
+          } @else if (activity.type === 'meeting') {
+            <div class="w-8 h-8 rounded-full bg-secondary-50 dark:bg-secondary-900/30 flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-secondary-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          }
+          <div class="flex-1 min-w-0">
+            <p class="text-sm text-neutral-900 dark:text-white">{{ activity.description }}</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{{ activity.date | date:'MMM d, y h:mm a' }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="text-sm text-neutral-500 dark:text-neutral-400 text-center py-8">No hay actividad reciente</p>
+  }
+</div>

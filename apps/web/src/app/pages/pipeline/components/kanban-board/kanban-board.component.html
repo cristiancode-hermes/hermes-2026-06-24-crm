@@ -1,0 +1,10 @@
+<div class="flex gap-4 overflow-x-auto pb-4">
+  @for (col of columns; track col.stage) {
+    <app-kanban-column
+      [title]="col.title"
+      [stage]="col.stage"
+      [deals]="getDealsForStage(col.stage)"
+      [colorClass]="col.color"
+    />
+  }
+</div>

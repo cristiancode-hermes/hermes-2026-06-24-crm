@@ -1,0 +1,13 @@
+<div
+  draggable="true"
+  (dragstart)="onDragStart($event)"
+  class="bg-white dark:bg-[#2a2a2a] rounded-lg border border-neutral-200 dark:border-neutral-600 p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow group"
+>
+  <a [routerLink]="['/pipeline/deal', deal().id]" class="block">
+    <p class="text-sm font-medium text-neutral-900 dark:text-white group-hover:text-primary-500 transition-colors truncate">{{ deal().name }}</p>
+    @if (deal().contactName) {
+      <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">{{ deal().contactName }}</p>
+    }
+    <p class="text-sm font-semibold text-neutral-900 dark:text-white mt-2">{{ deal().value | currency:'MXN':'symbol-narrow':'1.0-0' }}</p>
+  </a>
+</div>

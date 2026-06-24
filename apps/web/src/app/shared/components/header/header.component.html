@@ -1,0 +1,43 @@
+<header class="bg-white dark:bg-[#2a2a2a] border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-8">
+        <a routerLink="/dashboard" class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-sm">C</span>
+          </div>
+          <span class="font-semibold text-neutral-900 dark:text-white text-lg">CRM</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-1">
+          <a routerLink="/dashboard" routerLinkActive="bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300" class="px-3 py-2 rounded-md text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+            Dashboard
+          </a>
+          <a routerLink="/contacts" routerLinkActive="bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300" class="px-3 py-2 rounded-md text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+            Contactos
+          </a>
+          <a routerLink="/pipeline" routerLinkActive="bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300" class="px-3 py-2 rounded-md text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+            Pipeline
+          </a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        @if (currentUser(); as user) {
+          <div class="flex items-center gap-3">
+            <div class="hidden sm:block text-right">
+              <p class="text-sm font-medium text-neutral-900 dark:text-white">{{ user.name }}</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400">{{ user.orgName }}</p>
+            </div>
+            <div class="w-8 h-8 bg-secondary-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
+              {{ user.name.charAt(0).toUpperCase() }}
+            </div>
+            <button (click)="logout()" class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-warning-500 dark:hover:text-warning-500 transition-colors" title="Cerrar sesión">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</header>

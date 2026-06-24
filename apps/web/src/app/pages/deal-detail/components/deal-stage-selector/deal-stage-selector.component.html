@@ -1,0 +1,12 @@
+<div class="bg-white dark:bg-[#2a2a2a] rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
+  <h3 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Cambiar Etapa</h3>
+  <select
+    [ngModel]="deal().stage"
+    (ngModelChange)="stageChange.emit($event)"
+    class="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-[#1a1a1a] text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
+  >
+    @for (stage of stages; track stage.value) {
+      <option [value]="stage.value">{{ stage.label }}</option>
+    }
+  </select>
+</div>

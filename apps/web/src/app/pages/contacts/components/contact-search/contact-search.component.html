@@ -1,0 +1,20 @@
+<div class="flex items-center gap-4">
+  <div class="relative flex-1 max-w-md">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+    </svg>
+    <input
+      type="text"
+      [ngModel]="searchQuery()"
+      (ngModelChange)="onSearch($event)"
+      placeholder="Buscar contactos..."
+      class="w-full pl-10 pr-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-[#1a1a1a] text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none text-sm"
+    >
+  </div>
+  <button (click)="createNew.emit()" class="flex items-center gap-2 px-4 py-2 bg-primary-500 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors text-sm">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+    </svg>
+    Nuevo Contacto
+  </button>
+</div>

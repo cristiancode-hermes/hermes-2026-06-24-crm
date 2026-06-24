@@ -1,0 +1,24 @@
+<div
+  class="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl border border-neutral-200 dark:border-neutral-700 min-w-[280px] w-[280px] flex-shrink-0 flex flex-col"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
+  <div class="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-700">
+    <div class="flex items-center gap-2">
+      <div class="w-2.5 h-2.5 rounded-full" [class]="colorClass()"></div>
+      <h3 class="text-sm font-semibold text-neutral-900 dark:text-white">{{ title() }}</h3>
+    </div>
+    <span class="text-xs font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-200 dark:bg-neutral-700 px-2 py-0.5 rounded-full">{{ deals().length }}</span>
+  </div>
+  <div class="p-3 space-y-2 flex-1 overflow-y-auto min-h-[200px]">
+    @for (deal of deals(); track deal.id) {
+      <app-deal-card [deal]="deal" />
+    }
+    @if (deals().length === 0) {
+      <div class="flex items-center justify-center h-24 text-sm text-neutral-400 dark:text-neutral-500">
+        No hay deals en esta etapa
+      </div>
+    }
+  </div>
+</div>
