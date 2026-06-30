@@ -15,7 +15,10 @@ export class DashboardService {
 
     const deals = await this.dealsService.findAll(organizationId);
     const upcomingDeals = await this.dealsService.getUpcoming(organizationId);
-    const recentActivities = await this.activitiesService.findRecentByOrg(organizationId, 5);
+    const recentActivities = await this.activitiesService.findRecentByOrg(
+      organizationId,
+      5,
+    );
 
     return {
       kpis: {

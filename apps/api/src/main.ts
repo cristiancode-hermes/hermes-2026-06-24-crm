@@ -29,7 +29,9 @@ async function bootstrap() {
   // Swagger
   const config = new DocumentBuilder()
     .setTitle('Multi-Tenant CRM API')
-    .setDescription('CRM API for small businesses — contacts, deals, pipeline, activities')
+    .setDescription(
+      'CRM API for small businesses — contacts, deals, pipeline, activities',
+    )
     .setVersion('1.0')
     .addBearerAuth()
     .build();

@@ -1,13 +1,13 @@
-import {
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like, FindOptionsWhere } from 'typeorm';
 import { Contact } from './entities/contact.entity';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
-import { PaginationQueryDto, PaginatedResult } from '../common/dto/pagination.dto';
+import {
+  PaginationQueryDto,
+  PaginatedResult,
+} from '../common/dto/pagination.dto';
 
 @Injectable()
 export class ContactsService {
@@ -54,7 +54,10 @@ export class ContactsService {
     return contact;
   }
 
-  async create(dto: CreateContactDto, organizationId: number): Promise<Contact> {
+  async create(
+    dto: CreateContactDto,
+    organizationId: number,
+  ): Promise<Contact> {
     const contact = this.contactRepository.create({
       ...dto,
       organizationId,
@@ -62,7 +65,11 @@ export class ContactsService {
     return this.contactRepository.save(contact);
   }
 
-  async update(id: number, dto: UpdateContactDto, organizationId: number): Promise<Contact> {
+  async update(
+    id: number,
+    dto: UpdateContactDto,
+    organizationId: number,
+  ): Promise<Contact> {
     const contact = await this.findOne(id, organizationId);
     Object.assign(contact, dto);
     return this.contactRepository.save(contact);

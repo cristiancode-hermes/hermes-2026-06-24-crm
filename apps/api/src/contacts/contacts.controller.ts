@@ -28,30 +28,21 @@ export class ContactsController {
 
   @Get()
   @ApiOperation({ summary: 'List contacts with pagination and search' })
-  async findAll(
-    @Req() req: Request,
-    @Query() query: PaginationQueryDto,
-  ) {
+  async findAll(@Req() req: Request, @Query() query: PaginationQueryDto) {
     const user = req.user as { organizationId: number };
     return this.contactsService.findAll(user.organizationId, query);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a single contact with deals and activities' })
-  async findOne(
-    @Req() req: Request,
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  async findOne(@Req() req: Request, @Param('id', ParseIntPipe) id: number) {
     const user = req.user as { organizationId: number };
     return this.contactsService.findOne(id, user.organizationId);
   }
 
   @Post()
   @ApiOperation({ summary: 'Create a new contact' })
-  async create(
-    @Req() req: Request,
-    @Body() dto: CreateContactDto,
-  ) {
+  async create(@Req() req: Request, @Body() dto: CreateContactDto) {
     const user = req.user as { organizationId: number };
     return this.contactsService.create(dto, user.organizationId);
   }
@@ -69,10 +60,7 @@ export class ContactsController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a contact' })
-  async remove(
-    @Req() req: Request,
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  async remove(@Req() req: Request, @Param('id', ParseIntPipe) id: number) {
     const user = req.user as { organizationId: number };
     await this.contactsService.remove(id, user.organizationId);
     return { message: 'Contact deleted successfully' };

@@ -1,12 +1,12 @@
-import {
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere } from 'typeorm';
 import { Activity } from './entities/activity.entity';
 import { CreateActivityDto } from './dto/create-activity.dto';
-import { PaginationQueryDto, PaginatedResult } from '../common/dto/pagination.dto';
+import {
+  PaginationQueryDto,
+  PaginatedResult,
+} from '../common/dto/pagination.dto';
 
 @Injectable()
 export class ActivitiesService {
@@ -34,7 +34,9 @@ export class ActivitiesService {
     const [data, total] = await this.activityRepository.findAndCount({
       where,
       relations: { contact: true, deal: true },
-      order: sortBy ? { [sortBy]: sortOrder } : { date: 'DESC', createdAt: 'DESC' },
+      order: sortBy
+        ? { [sortBy]: sortOrder }
+        : { date: 'DESC', createdAt: 'DESC' },
       skip: (page - 1) * limit,
       take: limit,
     });
@@ -58,7 +60,10 @@ export class ActivitiesService {
     return activity;
   }
 
-  async create(dto: CreateActivityDto, organizationId: number): Promise<Activity> {
+  async create(
+    dto: CreateActivityDto,
+    organizationId: number,
+  ): Promise<Activity> {
     const activity = this.activityRepository.create({
       ...dto,
       organizationId,
@@ -71,7 +76,10 @@ export class ActivitiesService {
     await this.activityRepository.remove(activity);
   }
 
-  async findRecentByOrg(organizationId: number, limit = 5): Promise<Activity[]> {
+  async findRecentByOrg(
+    organizationId: number,
+    limit = 5,
+  ): Promise<Activity[]> {
     return this.activityRepository.find({
       where: { organizationId },
       relations: { contact: true, deal: true },

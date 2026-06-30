@@ -12,7 +12,12 @@ import {
   Req,
   ParseIntPipe,
 } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiOperation,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { DealsService } from './deals.service';
 import { CreateDealDto } from './dto/create-deal.dto';
 import { UpdateDealDto } from './dto/update-deal.dto';
@@ -59,20 +64,14 @@ export class DealsController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a single deal with contact and activities' })
-  async findOne(
-    @Req() req: Request,
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  async findOne(@Req() req: Request, @Param('id', ParseIntPipe) id: number) {
     const user = req.user as { organizationId: number };
     return this.dealsService.findOne(id, user.organizationId);
   }
 
   @Post()
   @ApiOperation({ summary: 'Create a new deal' })
-  async create(
-    @Req() req: Request,
-    @Body() dto: CreateDealDto,
-  ) {
+  async create(@Req() req: Request, @Body() dto: CreateDealDto) {
     const user = req.user as { organizationId: number };
     return this.dealsService.create(dto, user.organizationId);
   }
@@ -90,10 +89,7 @@ export class DealsController {
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a deal' })
-  async remove(
-    @Req() req: Request,
-    @Param('id', ParseIntPipe) id: number,
-  ) {
+  async remove(@Req() req: Request, @Param('id', ParseIntPipe) id: number) {
     const user = req.user as { organizationId: number };
     await this.dealsService.remove(id, user.organizationId);
     return { message: 'Deal deleted successfully' };

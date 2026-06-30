@@ -1,4 +1,7 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
@@ -48,7 +51,10 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  async validatePassword(plainPassword: string, passwordHash: string): Promise<boolean> {
+  async validatePassword(
+    plainPassword: string,
+    passwordHash: string,
+  ): Promise<boolean> {
     return bcrypt.compare(plainPassword, passwordHash);
   }
 }

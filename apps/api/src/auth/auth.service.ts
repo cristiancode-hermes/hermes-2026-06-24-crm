@@ -2,7 +2,6 @@ import {
   Injectable,
   ConflictException,
   UnauthorizedException,
-  InternalServerErrorException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,7 +20,10 @@ export class AuthService {
     private readonly orgRepository: Repository<Organization>,
   ) {}
 
-  async register(dto: RegisterDto): Promise<{ accessToken: string; user: { id: number; name: string; email: string; organizationId: number } }> {
+  async register(dto: RegisterDto): Promise<{
+    accessToken: string;
+    user: { id: number; name: string; email: string; organizationId: number };
+  }> {
     const slug = dto.orgName
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
@@ -43,7 +45,11 @@ export class AuthService {
         organizationId: savedOrg.id,
       });
 
-      const payload = { sub: user.id, email: user.email, organizationId: user.organizationId };
+      const payload = {
+        sub: user.id,
+        email: user.email,
+        organizationId: user.organizationId,
+      };
       const accessToken = this.jwtService.sign(payload);
 
       return {
@@ -61,18 +67,28 @@ export class AuthService {
     }
   }
 
-  async login(dto: LoginDto): Promise<{ accessToken: string; user: { id: number; name: string; email: string; organizationId: number } }> {
+  async login(dto: LoginDto): Promise<{
+    accessToken: string;
+    user: { id: number; name: string; email: string; organizationId: number };
+  }> {
     const user = await this.usersService.findByEmail(dto.email);
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const isPasswordValid = await this.usersService.validatePassword(dto.password, user.passwordHash);
+    const isPasswordValid = await this.usersService.validatePassword(
+      dto.password,
+      user.passwordHash,
+    );
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload = { sub: user.id, email: user.email, organizationId: user.organizationId };
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      organizationId: user.organizationId,
+    };
     const accessToken = this.jwtService.sign(payload);
 
     return {
@@ -86,7 +102,14 @@ export class AuthService {
     };
   }
 
-  async getProfile(userId: number): Promise<{ id: number; name: string; email: string; role: string; organizationName: string; organizationId: number }> {
+  async getProfile(userId: number): Promise<{
+    id: number;
+    name: string;
+    email: string;
+    role: string;
+    organizationName: string;
+    organizationId: number;
+  }> {
     const user = await this.usersService.findById(userId);
     if (!user) {
       throw new UnauthorizedException('User not found');

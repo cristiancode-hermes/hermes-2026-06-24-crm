@@ -1,7 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere } from 'typeorm';
 import { Deal } from './entities/deal.entity';
@@ -56,7 +53,11 @@ export class DealsService {
     return this.dealRepository.save(deal);
   }
 
-  async update(id: number, dto: UpdateDealDto, organizationId: number): Promise<Deal> {
+  async update(
+    id: number,
+    dto: UpdateDealDto,
+    organizationId: number,
+  ): Promise<Deal> {
     const deal = await this.findOne(id, organizationId);
     Object.assign(deal, dto);
     return this.dealRepository.save(deal);
@@ -92,9 +93,17 @@ export class DealsService {
     const wonValue = wonDeals.reduce((sum, d) => sum + d.value, 0);
 
     const totalClosed = wonDeals.length + lostDeals.length;
-    const conversionRate = totalClosed > 0 ? (wonDeals.length / totalClosed) * 100 : 0;
+    const conversionRate =
+      totalClosed > 0 ? (wonDeals.length / totalClosed) * 100 : 0;
 
-    const stages = ['Nuevo', 'Calificado', 'Propuesta', 'Negociación', 'Cerrado Ganado', 'Cerrado Perdido'];
+    const stages = [
+      'Nuevo',
+      'Calificado',
+      'Propuesta',
+      'Negociación',
+      'Cerrado Ganado',
+      'Cerrado Perdido',
+    ];
     const stageValues = stages.map((stage) => {
       const stageDeals = deals.filter((d) => d.stage === stage);
       return {
@@ -128,7 +137,9 @@ export class DealsService {
 
     return deals.filter((d) => {
       if (!d.expectedCloseDate) return false;
-      return d.expectedCloseDate >= todayStr && d.expectedCloseDate <= nextWeekStr;
+      return (
+        d.expectedCloseDate >= todayStr && d.expectedCloseDate <= nextWeekStr
+      );
     });
   }
 }

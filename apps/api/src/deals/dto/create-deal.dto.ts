@@ -2,7 +2,14 @@ import { IsString, IsNumber, IsOptional, IsInt, IsIn } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
-const VALID_STAGES = ['Nuevo', 'Calificado', 'Propuesta', 'Negociación', 'Cerrado Ganado', 'Cerrado Perdido'];
+const VALID_STAGES = [
+  'Nuevo',
+  'Calificado',
+  'Propuesta',
+  'Negociación',
+  'Cerrado Ganado',
+  'Cerrado Perdido',
+];
 
 export class CreateDealDto {
   @ApiProperty()

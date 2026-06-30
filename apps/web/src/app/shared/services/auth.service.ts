@@ -24,19 +24,19 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string): Observable<{ token: string; user: User }> {
-    return this.http.post<{ token: string; user: User }>(`${this.apiUrl}/login`, { email, password }).pipe(
+  login(email: string, password: string): Observable<{ accessToken: string; user: User }> {
+    return this.http.post<{ accessToken: string; user: User }>(`${this.apiUrl}/login`, { email, password }).pipe(
       tap((res) => {
-        localStorage.setItem('auth_token', res.token);
+        localStorage.setItem('auth_token', res.accessToken);
         this.currentUser.set(res.user);
       })
     );
   }
 
-  register(orgName: string, userName: string, email: string, password: string): Observable<{ token: string; user: User }> {
-    return this.http.post<{ token: string; user: User }>(`${this.apiUrl}/register`, { orgName, userName, email, password }).pipe(
+  register(orgName: string, userName: string, email: string, password: string): Observable<{ accessToken: string; user: User }> {
+    return this.http.post<{ accessToken: string; user: User }>(`${this.apiUrl}/register`, { orgName, userName, email, password }).pipe(
       tap((res) => {
-        localStorage.setItem('auth_token', res.token);
+        localStorage.setItem('auth_token', res.accessToken);
         this.currentUser.set(res.user);
       })
     );
