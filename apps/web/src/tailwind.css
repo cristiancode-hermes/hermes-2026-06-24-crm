@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-brand-50: #f3f3f9;
+    --color-brand-100: #e5e4f3;
+    --color-brand-200: #cdcbe8;
+    --color-brand-300: #aba8d8;
+    --color-brand-400: #736ebf;
+    --color-brand-500: #3730a3;
+    --color-brand-600: #2f298c;
+    --color-brand-700: #262272;
+    --color-brand-800: #201c5f;
+    --color-brand-900: #191649;
+    --color-surface-50: #f0effa;
+    --color-surface-100: #e9e8f2;
+    --color-surface-200: #dfdee8;
+    --color-surface-300: #ceced7;
+    --color-surface-400: #adacb4;
+    --color-surface-500: #8b8b91;
+    --color-surface-600: #6c6c70;
+    --color-surface-700: #4d4c50;
+    --color-surface-800: #303032;
+    --color-surface-900: #181819;
+    --color-surface-950: #020617;
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+/* Semantic aliases used by styles.scss */
+    --color-surface-page: #f0effa;
+    --color-ink: #312e81;
+    --color-ink-secondary: #5c5b84;
+    --color-ink-muted: #7a789a;
+    --color-surface: #ffffff;
+    --color-surface-alt: #e9e8f2;
+    --color-edge: #dfdee8;
+    --color-edge-light: #e9e8f2;
+    --color-primary: #3730a3;
+    --color-primary-50: var(--color-brand-50);
+    --color-primary-100: var(--color-brand-100);
+    --color-primary-200: var(--color-brand-200);
+    --color-primary-300: var(--color-brand-300);
+    --color-primary-400: var(--color-brand-400);
+    --color-primary-500: var(--color-brand-500);
+    --color-primary-600: var(--color-brand-600);
+    --color-primary-700: var(--color-brand-700);
+    --color-primary-800: var(--color-brand-800);
+    --color-primary-900: var(--color-brand-900);
+    --color-accent: #a5b4fc;
+    --color-accent-50: var(--color-brand-50);
+    --color-accent-500: var(--color-brand-500);
+    --color-accent-600: var(--color-brand-600);
+    --color-secondary-50: var(--color-surface-50);
+    --color-secondary-100: var(--color-surface-100);
+    --color-secondary-200: var(--color-surface-200);
+    --color-secondary-500: var(--color-surface-500);
+    --color-secondary-600: var(--color-surface-600);
+    --color-secondary-700: var(--color-surface-700);
+    --color-error: #ef4444;
+    --color-error-bg: #fef2f2;
+    --color-success: #22c55e;
+    --color-success-bg: #f0fdf4;
+    --font-heading: 'Manrope', 'Segoe UI', sans-serif;
+    --font-body: 'Manrope', 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+}

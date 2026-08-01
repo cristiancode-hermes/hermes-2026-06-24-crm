@@ -7,7 +7,7 @@ import { DashboardData } from '../models/dashboard.model';
   providedIn: 'root',
 })
 export class DashboardService {
-  private readonly apiUrl = 'http://localhost:3000/api/dashboard';
+  private readonly apiUrl = '/api/dashboard';
   private readonly http = inject(HttpClient);
 
   getDashboard(): Observable<DashboardData> {

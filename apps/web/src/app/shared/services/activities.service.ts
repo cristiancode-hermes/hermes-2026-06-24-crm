@@ -8,7 +8,7 @@ import { PaginatedResult } from '../models/paginated-result.model';
   providedIn: 'root',
 })
 export class ActivitiesService {
-  private readonly apiUrl = 'http://localhost:3000/api/activities';
+  private readonly apiUrl = '/api/activities';
   private readonly http = inject(HttpClient);
 
   getAll(params?: {

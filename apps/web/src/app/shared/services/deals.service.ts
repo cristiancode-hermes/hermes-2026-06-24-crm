@@ -7,7 +7,7 @@ import { Deal, DealStatusUpdate } from '../models/deal.model';
   providedIn: 'root',
 })
 export class DealsService {
-  private readonly apiUrl = 'http://localhost:3000/api/deals';
+  private readonly apiUrl = '/api/deals';
   private readonly http = inject(HttpClient);
 
   getAll(params?: { stage?: string; contactId?: number }): Observable<Deal[]> {

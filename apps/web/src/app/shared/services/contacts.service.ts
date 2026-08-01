@@ -8,7 +8,7 @@ import { PaginatedResult } from '../models/paginated-result.model';
   providedIn: 'root',
 })
 export class ContactsService {
-  private readonly apiUrl = 'http://localhost:3000/api/contacts';
+  private readonly apiUrl = '/api/contacts';
   private readonly http = inject(HttpClient);
 
   getAll(params?: {

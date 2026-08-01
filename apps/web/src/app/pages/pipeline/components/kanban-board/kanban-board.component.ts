@@ -18,12 +18,12 @@ export class KanbanBoardComponent {
   readonly stageChanged = output<{ dealId: number; stage: string }>();
 
   readonly columns: ColumnConfig[] = [
-    { stage: 'nuevo', title: 'Nuevo', color: 'bg-neutral-400' },
-    { stage: 'calificado', title: 'Calificado', color: 'bg-primary-400' },
-    { stage: 'propuesta', title: 'Propuesta', color: 'bg-secondary-400' },
-    { stage: 'negociacion', title: 'Negociación', color: 'bg-accent-500' },
-    { stage: 'cerrado_ganado', title: 'Cerrado Ganado', color: 'bg-success-500' },
-    { stage: 'cerrado_perdido', title: 'Cerrado Perdido', color: 'bg-warning-500' },
+    { stage: 'Nuevo', title: 'Nuevo', color: 'bg-neutral-400' },
+    { stage: 'Calificado', title: 'Calificado', color: 'bg-primary-400' },
+    { stage: 'Propuesta', title: 'Propuesta', color: 'bg-secondary-400' },
+    { stage: 'Negociación', title: 'Negociación', color: 'bg-accent-500' },
+    { stage: 'Cerrado Ganado', title: 'Cerrado Ganado', color: 'bg-success-500' },
+    { stage: 'Cerrado Perdido', title: 'Cerrado Perdido', color: 'bg-warning-500' },
   ];
 
   getDealsForStage(stage: string): Deal[] {

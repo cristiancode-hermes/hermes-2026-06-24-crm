@@ -55,7 +55,7 @@ describe('AuthService', () => {
 
       const loginPromise = firstValueFrom(service.login('admin@test.com', 'password'));
 
-      const req = httpMock.expectOne('http://localhost:3000/api/auth/login');
+      const req = httpMock.expectOne('/api/auth/login');
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual({ email: 'admin@test.com', password: 'password' });
       req.flush(mockResponse);
@@ -69,7 +69,7 @@ describe('AuthService', () => {
     it('should fail with invalid credentials', async () => {
       const loginPromise = firstValueFrom(service.login('wrong@test.com', 'wrong'));
 
-      const req = httpMock.expectOne('http://localhost:3000/api/auth/login');
+      const req = httpMock.expectOne('/api/auth/login');
       req.flush({ message: 'Invalid credentials' }, { status: 401, statusText: 'Unauthorized' });
 
       await expect(loginPromise).rejects.toBeTruthy();
@@ -88,7 +88,7 @@ describe('AuthService', () => {
         service.register('My Org', 'Jane', 'jane@test.com', 'password')
       );
 
-      const req = httpMock.expectOne('http://localhost:3000/api/auth/register');
+      const req = httpMock.expectOne('/api/auth/register');
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual({
         orgName: 'My Org',

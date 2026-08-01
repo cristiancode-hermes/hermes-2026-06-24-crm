@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:3000/api/auth';
+  private readonly apiUrl = '/api/auth';
   private readonly router = inject(Router);
   private readonly http = inject(HttpClient);
 
@@ -19,7 +19,7 @@ export class AuthService {
     if (token) {
       this.http.get<User>(`${this.apiUrl}/profile`).subscribe({
         next: (user) => this.currentUser.set(user),
-        error: () => this.logout(),
+        error: () => { this.currentUser.set(null); },
       });
     }
   }
