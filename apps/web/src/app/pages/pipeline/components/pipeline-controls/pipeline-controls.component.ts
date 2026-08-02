@@ -8,4 +8,5 @@ import { Component, input, output } from '@angular/core';
 export class PipelineControlsComponent {
   readonly totalDeals = input<number>(0);
   readonly newDeal = output<void>();
+  readonly exportDeals = output<void>();
 }

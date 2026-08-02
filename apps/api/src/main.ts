@@ -38,8 +38,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  // Global prefix
-  app.setGlobalPrefix('api', { exclude: [''] });
+  // Global prefix removed — each controller defines its own path (e.g. @Controller('api/...'))
+  // app.setGlobalPrefix('api', { exclude: [''] });
 
   const port = process.env.PORT ?? 3000;
   await app.listen(port);

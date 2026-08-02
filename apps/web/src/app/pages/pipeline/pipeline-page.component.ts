@@ -66,6 +66,21 @@ export class PipelinePageComponent {
     });
   }
 
+  exportCsv(): void {
+    this.dealsService.exportCsv().subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `deals-${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.toastService.success('Deals exportados a CSV');
+      },
+      error: () => this.toastService.error('Error al exportar deals'),
+    });
+  }
+
   private loadStageValues(): void {
     this.dealsService.getKpi().subscribe({
       next: (kpi) => {

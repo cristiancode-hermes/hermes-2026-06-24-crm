@@ -22,13 +22,31 @@ import { AppService } from './app.service';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'better-sqlite3',
-        database: config.get<string>('DATABASE_PATH', './data/crm.sqlite'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
-        autoLoadEntities: false,
-      }),
+      useFactory: (config: ConfigService) => {
+        const dbType = config.get<string>('DATABASE_TYPE') || 'sqlite';
+        const url = config.get<string>('DATABASE_URL') || '';
+
+        if (dbType === 'postgres') {
+          return {
+            type: 'postgres',
+            url,
+            entities: [__dirname + '/**/*.entity{.ts,.js}'],
+            synchronize: true,
+            autoLoadEntities: false,
+            ssl: { rejectUnauthorized: false },
+          };
+        }
+
+        return {
+          type: 'better-sqlite3',
+          database: url.includes('://')
+            ? config.get<string>('DATABASE_PATH', './data/crm.sqlite')
+            : config.get<string>('DATABASE_PATH', './data/crm.sqlite'),
+          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          synchronize: true,
+          autoLoadEntities: false,
+        };
+      },
     }),
     AuthModule,
     ContactsModule,

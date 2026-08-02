@@ -48,9 +48,9 @@ export class Contact {
   @OneToMany(() => Activity, (activity) => activity.contact)
   activities: Activity[];
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 }

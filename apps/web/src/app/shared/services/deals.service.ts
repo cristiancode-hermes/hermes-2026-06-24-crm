@@ -39,6 +39,10 @@ export class DealsService {
     return this.http.patch<Deal>(`${this.apiUrl}/${id}/status`, dto);
   }
 
+  exportCsv(): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/export`, { responseType: 'blob' });
+  }
+
   getKpi(): Observable<{ totalDeals: number; pipelineValue: number; wonValue: number; conversionRate: number; stageValues: { stage: string; value: number; count: number }[] }> {
     return this.http.get<{ totalDeals: number; pipelineValue: number; wonValue: number; conversionRate: number; stageValues: { stage: string; value: number; count: number }[] }>(`${this.apiUrl}/kpi`);
   }

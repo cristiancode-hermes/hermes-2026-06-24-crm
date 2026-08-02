@@ -9,6 +9,7 @@ import {
   Query,
   UseGuards,
   Req,
+  Res,
   ParseIntPipe,
 } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
@@ -31,6 +32,19 @@ export class ContactsController {
   async findAll(@Req() req: Request, @Query() query: PaginationQueryDto) {
     const user = req.user as { organizationId: number };
     return this.contactsService.findAll(user.organizationId, query);
+  }
+
+  @Get('export')
+  @ApiOperation({ summary: 'Export contacts as CSV' })
+  async exportCsv(@Req() req: Request, @Query('q') q?: string, @Res() res?: any) {
+    const user = req.user as { organizationId: number };
+    const { filename, csv } = await this.contactsService.exportCsv(
+      user.organizationId,
+      q,
+    );
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.send(csv);
   }
 
   @Get(':id')

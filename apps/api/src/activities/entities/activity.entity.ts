@@ -45,6 +45,6 @@ export class Activity {
   @JoinColumn({ name: 'organizationId' })
   organization: Organization;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 }

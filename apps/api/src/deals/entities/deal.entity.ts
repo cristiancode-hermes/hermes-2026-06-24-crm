@@ -52,9 +52,9 @@ export class Deal {
   @OneToMany(() => Activity, (activity) => activity.deal)
   activities: Activity[];
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 }

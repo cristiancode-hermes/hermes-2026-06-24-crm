@@ -1,6 +1,12 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <div class="flex items-center justify-between mb-8">
     <h1 class="text-2xl font-bold text-neutral-900 dark:text-white">Contactos</h1>
+    <button (click)="exportCsv()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:border-primary-400 hover:text-primary-700 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+        <path fill-rule="evenodd" d="M3 3.5A1.5 1.5 0 014.5 2h6.879a1.5 1.5 0 011.06.44l4.122 4.12A1.5 1.5 0 0117 7.622V16.5a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 16.5v-13zm10.857 5.691a.75.75 0 00-1.06-1.06L10 10.56 7.203 8.13a.75.75 0 00-1.06 1.06l3 3.25a.75.75 0 001.06 0l3.654-3.75z" clip-rule="evenodd"/>
+      </svg>
+      Export CSV
+    </button>
   </div>
 
   <div class="space-y-4">

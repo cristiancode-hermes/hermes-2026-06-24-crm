@@ -79,4 +79,33 @@ export class ContactsService {
     const contact = await this.findOne(id, organizationId);
     await this.contactRepository.remove(contact);
   }
+
+  async exportCsv(organizationId: number, q?: string) {
+    const where: FindOptionsWhere<Contact> = { organizationId };
+    if (q) {
+      where.name = Like(`%${q}%`);
+    }
+    const contacts = await this.contactRepository.find({ where });
+
+    const escape = (v: unknown): string => {
+      const s = v == null ? '' : String(v);
+      return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+
+    const header = ['name', 'email', 'phone', 'company', 'role', 'notes', 'created_at'];
+    const rows = contacts.map((c) => [
+      c.name,
+      c.email,
+      c.phone,
+      c.company,
+      c.role,
+      c.notes,
+      c.createdAt ? new Date(c.createdAt).toISOString() : '',
+    ]);
+
+    return {
+      filename: `contacts-${new Date().toISOString().slice(0, 10)}.csv`,
+      csv: [header, ...rows].map((r) => r.map(escape).join(',')).join('\n'),
+    };
+  }
 }

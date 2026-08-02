@@ -10,6 +10,7 @@ import {
   Query,
   UseGuards,
   Req,
+  Res,
   ParseIntPipe,
 } from '@nestjs/common';
 import {
@@ -60,6 +61,24 @@ export class DealsController {
   async getUpcoming(@Req() req: Request) {
     const user = req.user as { organizationId: number };
     return this.dealsService.getUpcoming(user.organizationId);
+  }
+
+  @Get('export')
+  @ApiOperation({ summary: 'Export deals as CSV' })
+  @ApiQuery({ name: 'stage', required: false })
+  async exportCsv(
+    @Req() req: Request,
+    @Query('stage') stage?: string,
+    @Res() res?: any,
+  ) {
+    const user = req.user as { organizationId: number };
+    const { filename, csv } = await this.dealsService.exportCsv(
+      user.organizationId,
+      stage,
+    );
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.send(csv);
   }
 
   @Get(':id')

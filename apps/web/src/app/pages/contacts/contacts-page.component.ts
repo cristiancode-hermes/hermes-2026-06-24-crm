@@ -76,6 +76,21 @@ export class ContactsPageComponent {
     this.loadContacts();
   }
 
+  exportCsv(): void {
+    this.contactsService.exportCsv().subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `contacts-${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        this.toastService.show('success', 'Contactos exportados a CSV');
+      },
+      error: () => this.toastService.show('error', 'Error al exportar contactos'),
+    });
+  }
+
   openCreateForm(): void {
     this.editingContact.set(null);
     this.showForm.set(true);

@@ -142,4 +142,29 @@ export class DealsService {
       );
     });
   }
+
+  async exportCsv(organizationId: number, stage?: string) {
+    const deals = await this.findAll(organizationId, { stage });
+
+    const escape = (v: unknown): string => {
+      const s = v == null ? '' : String(v);
+      return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+
+    const header = ['name', 'value', 'stage', 'contact', 'expected_close', 'notes', 'created_at'];
+    const rows = deals.map((d) => [
+      d.name,
+      d.value,
+      d.stage,
+      d.contact?.name ?? '',
+      d.expectedCloseDate ?? '',
+      d.notes,
+      d.createdAt ? new Date(d.createdAt).toISOString() : '',
+    ]);
+
+    return {
+      filename: `deals-${new Date().toISOString().slice(0, 10)}.csv`,
+      csv: [header, ...rows].map((r) => r.map(escape).join(',')).join('\n'),
+    };
+  }
 }

@@ -46,18 +46,31 @@ export class SeedService implements OnModuleInit {
 
     // 2. Create admin user
     const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash('dev-secret', salt);
+    const adminPasswordHash = await bcrypt.hash('dev-secret', salt);
 
     const admin = this.userRepository.create({
       name: 'Admin',
       email: 'admin@acme.com',
-      passwordHash,
+      passwordHash: adminPasswordHash,
       role: 'admin',
       organizationId: savedOrg.id,
     });
     const savedAdmin = await this.userRepository.save(admin);
 
-    // 3. Create 10 contacts
+    // 3. Create demo user
+    const demoSalt = await bcrypt.genSalt(10);
+    const demoPasswordHash = await bcrypt.hash('demo123', demoSalt);
+
+    const demo = this.userRepository.create({
+      name: 'Demo User',
+      email: 'demo@crm.test',
+      passwordHash: demoPasswordHash,
+      role: 'admin',
+      organizationId: savedOrg.id,
+    });
+    await this.userRepository.save(demo);
+
+    // 4. Create 10 contacts
     const contactData = [
       {
         name: 'Juan Pérez',
