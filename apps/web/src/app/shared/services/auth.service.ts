@@ -17,9 +17,14 @@ export class AuthService {
   constructor() {
     const token = this.getToken();
     if (token) {
-      this.http.get<User>(`${this.apiUrl}/profile`).subscribe({
-        next: (user) => this.currentUser.set(user),
-        error: () => { this.currentUser.set(null); },
+      // Deferido: el interceptor hace injector.get(AuthService) al emitir la
+      // request; si esto corre durante la construcción de AuthService
+      // (NG0200, inyección circular) el perfil nunca carga al recargar.
+      queueMicrotask(() => {
+        this.http.get<User>(`${this.apiUrl}/profile`).subscribe({
+          next: (user) => this.currentUser.set(user),
+          error: () => { this.currentUser.set(null); },
+        });
       });
     }
   }
